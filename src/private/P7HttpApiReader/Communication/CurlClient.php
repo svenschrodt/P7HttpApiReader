@@ -26,10 +26,6 @@ namespace P7HttpApiReader\Communication;
  * 
  * @todo - implementing support for HTTP proxies, allowing to use this stuff within corporations etc.
  * 
- * 
- * @todo -after finishing implementation of __CLASS_ -> write AbstractClient for client, CurlClient and others
- * -> DRY!
- *
  * @package P7HttpApiReader
  * @author Sven Schrodt<sven@schrodt-service.net>
  * @see https://github.com/svenschrodt/P7HttpApiReader
@@ -37,7 +33,7 @@ namespace P7HttpApiReader\Communication;
  * @version 0.1
  * @copyright Sven Schrodt<sven@schrodt-service.net>
  */
-class CurlClient implements ClientInterface
+class CurlClient 
 {
 
     /**
@@ -99,21 +95,21 @@ class CurlClient implements ClientInterface
         
         //@ TODO -> try this
         
-        // Then, after your curl_exec call:
-        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-        $header = substr($response, 0, $header_size);
-        $body = substr($response, $header_size);
+//         // Then, after your curl_exec call:
+//         $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+//         $header = substr($response, 0, $header_size);
+//         $body = substr($response, $header_size);
         
         
-        $this->lastResponseBody = curl_exec($ch);
+//         $this->lastResponseBody = curl_exec($ch);
 
-        $res = curl_getinfo ( $ch );
-        var_dump($res);die;
+//         $res = curl_getinfo ( $ch );
+//         var_dump($res);die;
         
-        $this->statusCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+//         $this->statusCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+//         curl_close($ch);
         
-        return $this->lastResponseBody ;
+//         return $this->lastResponseBody ;
         
        // return ( $this->_responseCode >= 200 &&  $this->_responseCode < 300) ? $this->_content : false;
     }
