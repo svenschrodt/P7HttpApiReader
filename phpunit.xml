@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--**
+ * PictureWitch
+ *
+ * PHPUnit configuration file for testing units of P7Graph
+ *
+ * @author Sven Schrodt<sven@schrodt-service.net>
+ * @package ProjectName
+ * @copyright Sven Schrodt<sven@schrodt-service.net>
+ * @version 0.1
+ * @since 2020-03-11
+ */-->
+
+
+<phpunit bootstrap="Bootstrap.php" colors="true" verbose="true">
+	<php>
+        <env name="PROJECT_NAME" value="ProjectName"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="Testing ProjectName">
+            <directory>./test/</directory>
+        </testsuite>
+    </testsuites>
+  <!--  Rules for code coverage -->
+    <filter>
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./src/public</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

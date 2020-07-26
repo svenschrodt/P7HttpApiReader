@@ -1,25 +1,24 @@
-# CakePHP 3
+# P7HttpApiReade .gitignore
+#
+# exclude IDE etc.specific 
+.settings
+.project
+.buildpath
 
-/vendor/*
-/config/app.php
+# exclude project specific temp. deprecated resources
+*.depr
+/tmp
 
-/tmp/cache/models/*
-!/tmp/cache/models/empty
-/tmp/cache/persistent/*
-!/tmp/cache/persistent/empty
-/tmp/cache/views/*
-!/tmp/cache/views/empty
-/tmp/sessions/*
-!/tmp/sessions/empty
-/tmp/tests/*
-!/tmp/tests/empty
+# exclude 3rd party stuff
+/vendor
+composer.json
+composer.lock
 
-/logs/*
-!/logs/empty
+# exclude local functional testing resources
+index.php
+.htaccess
+post.html
+# exclude local configuration
+.local.conf.php 
 
-# CakePHP 2
 
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
