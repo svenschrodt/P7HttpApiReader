@@ -2,7 +2,7 @@
 /**
  * \P7HttpApiReader\Communication\CurlClient
  *
- * Abstract class with common code base of Http clients
+ * Abstract class with common code base of HTTP clients
  *
  * @todo - complete method list with *all* HTTP verbs;-)
  *
@@ -16,46 +16,11 @@
  */
 
 namespace P7HttpApiReader\Communication;
-/**
- * \P7HttpApiReader\Communication\CurlClient
- *
- * Htttp client using Curl extension
- *
- *
- * @todo -getter & setter for request headers vi cfg, .ini or CFg-Object
- * 
- * @todo - implementing support for HTTP proxies, allowing to use this stuff within corporations etc.
- * 
- * @package P7HttpApiReader
- * @author Sven Schrodt<sven@schrodt-service.net>
- * @see https://github.com/svenschrodt/P7HttpApiReader
- * @see https://travis-ci.org/github/svenschrodt/P7HttpApiReader
- * @version 0.1
- * @copyright Sven Schrodt<sven@schrodt-service.net>
- */
+
 class CurlClient 
 {
 
-    /**
-     * Content from received from url via http(s)
-     *
-     * @var string
-     */
-    protected $lastResponseBody = '';
-    
-    /**
-     * Response headers of received http(s) message 
-     *
-     * @var array
-     */
-    protected $responseHeaders;
-
-    /**
-     * Http response code received by last request
-     *
-     * @var integer
-     */
-    protected $statusCode = 0;
+   
 
     /**
      * Constructor function 

@@ -4,7 +4,7 @@ namespace P7HttpApiReader\Communication;
 /**
  * \P7HttpApiReader\Communication\AbstractClient
  *
- * Abstract class with common code base of Http clients 
+ * Abstract class with common code base for HTTP(S) clients 
  * 
  * @todo - complete method list with *all* HTTP verbs;-)
  * 
@@ -19,26 +19,26 @@ namespace P7HttpApiReader\Communication;
 abstract class AbstractClient
 {
     
-    /**
-     * Content from received from url via http(s)
+     /**
+     * Content (“body”) of received message from HTTP(S) endpoint
      *
      * @var string
      */
-    protected $lastResponseBody = '';
+    protected $responseBody;
     
     /**
-     * Response headers of received http(s) message
+     * Response headers of received HTTP(S) message 
      *
      * @var array
      */
     protected $responseHeaders;
-    
+
     /**
-     * Http response code received by last request
+     * HTTP(S) response code received by last request
      *
      * @var integer
      */
-    protected $statusCode = 0;
+    protected $statusCode;
     
     /**
      * Constructor function

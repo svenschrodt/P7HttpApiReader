@@ -2,7 +2,8 @@
 /**
  * \P7HttpApiReader\Communication\Protocol
  *
- * Class representing general HTTP protocol (methods, headers , other  attributes etc.)
+ * Class representing general HTTP protocol 
+ * (methods, headers , other  attributes etc.)
  *
  * !Do not use in production until it is stable!
  *
