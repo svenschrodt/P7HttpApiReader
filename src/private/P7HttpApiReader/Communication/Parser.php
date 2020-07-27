@@ -5,6 +5,8 @@
  *
  * Class for parsing HTTP(s) messages (requests and responses)
  * 
+ * @todo -Optimizing message splitting (header size) --> multipart messages exist!
+ * 
  * @package P7HttpApiReader
  * @version 0.1
  * @since 2020-07-26
@@ -31,7 +33,8 @@ class Parser
     }
 
     /**
-     * Checking if given string is a valid HTTP message, containing CRLFCRLF as separator
+     * Checking if given string is a valid HTTP message, containing CRLFCRLF as 
+     * separator
      * 
      * @param $string
      * @return bool
@@ -60,6 +63,21 @@ class Parser
             }
         }
         return $headerData;
+    }
+    
+    public static function getArrayFromHeader(string $header)
+    {
+        // explode from self::HEADER_SEPARATOR
+        //@todo -> @see headers_list()
+        $headers= [];
+        $tmp  = explode(Protocol::HEADER_SEPARATOR, $header);
+        $headers[] = array_shift($tmp);
+        foreach ($tmp as $item) {
+            
+            list($key, $value)= explode(':', $item);
+            $headers[$key] = trim($value);
+        }
+        return $headers;
     }
 
 }

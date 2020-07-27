@@ -19,7 +19,7 @@
  */
 
 namespace P7HttpApiReader\Communication;
-
+      
 class Protocol
 {
     //@todo add mor comments
@@ -39,6 +39,8 @@ class Protocol
     
     const HEADER_SEPARATOR = "\r\n";
     const MESSAGE_SEPARATOR = "\r\n\r\n";
+
+    const HEADER_ASSIGNMENT= ':';
     
     /**
      * Array with valid HTTP request methods
@@ -94,7 +96,7 @@ class Protocol
      * @param bool $codeOnly
      * @return array
      */
-    public function getStatusCodes($codeOnly = false)
+    public function getStatusCodes($codeOnly = false) : array
     {
         return ($codeOnly) ? array_keys(self::$statusCodes) : self::$statusCodes;
     }
@@ -115,7 +117,7 @@ class Protocol
      * @param $method
      * @return bool
      */
-    public function isValidMethod($method)
+    public function isValidMethod($method) : bool
     {
         return in_array(strtoupper($method), $this->validMethods, true);
     }

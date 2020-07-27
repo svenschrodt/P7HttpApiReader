@@ -18,7 +18,7 @@
  */
 namespace P7HttpApiReader\Communication;
 
-use P7HttpApiReader\Communication\ClientInterface;
+
 
 /**
  *

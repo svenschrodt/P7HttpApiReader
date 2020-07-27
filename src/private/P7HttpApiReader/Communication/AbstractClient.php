@@ -19,7 +19,44 @@ namespace P7HttpApiReader\Communication;
 abstract class AbstractClient
 {
     
-     /**
+    /**
+     * Raw http headers
+     * 
+     * @var array
+     */
+    protected $rawHeader = [];
+    
+    
+    /**
+     * URI of endpoint of current request 
+     * 
+     * @var string 
+     */
+    protected $uri;
+    
+    /**
+     * Request headers of current HTTP(S) message sent to server
+     *
+     * @var array
+     */
+    protected $requestHeaders;
+    
+    /**
+     * Method of current HTTP request
+     * 
+     * @var string
+     */
+    protected $requestMethod;
+    
+    
+    /**
+     * Holding parameters|paylof for curent request
+     * 
+     * @var array
+     */
+    protected $requestParameters;
+    
+    /**
      * Content (“body”) of received message from HTTP(S) endpoint
      *
      * @var string
@@ -33,6 +70,13 @@ abstract class AbstractClient
      */
     protected $responseHeaders;
 
+    /**
+     * Size of current response header
+     * 
+     * @var int
+     */
+    protected $responseHeaderSize;
+    
     /**
      * HTTP(S) response code received by last request
      *
@@ -63,9 +107,9 @@ abstract class AbstractClient
      * @param string $url
      * @return boolean|mixed
      */
-    public function processRequest($uri, $method = 'GET', array $parameters = [])
+    public function processRequest(string $uri, string $method = 'GET', array $parameters = [])
     {
-       
+
     }
     
     
@@ -87,7 +131,7 @@ abstract class AbstractClient
     }
     
     /**
-     * Processig HTTP(S) request with method POST, sending optional payload
+     * Processig HTTP(S) request with method POST, sending payload
      * as query string within URI
      * 
      * @param string $uri
@@ -130,7 +174,7 @@ abstract class AbstractClient
     }
     
     /**
-     * Processig HTTP(S) request with method PUT, sending optional payload
+     * Processig HTTP(S) request with method PUT, sending payload
      * as query string within URI
      * 
      * @param string $uri
@@ -143,5 +187,13 @@ abstract class AbstractClient
         return $this;
     }
     
-    
+    /**
+     * Getting content (“body”) of current HTTP response
+     * 
+     * @return string
+     */
+    public function getContent() 
+    {
+        return $this->responseBody;
+    }
 }
