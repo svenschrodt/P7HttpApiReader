@@ -1,8 +1,11 @@
 <?php declare(strict_types = 1);
 /**
- * Example bootstrapping for namespace /ProjectName/
+ * Example bootstrapping for namespace /P7HttpApiReader
+ * 
+ * 
+ * @todo --> make it PSR-*-compliant
  *  
- * @package ProjectName
+ * @package P7HttpApiReader
  * @author Sven Schrodt<sven@schrodt-service.net>
  * @version 0.1
  * @since 2020-03-11
@@ -14,12 +17,13 @@
 define('PW_NS', '\\P7HttpApiReader');
 define('PW_LIB_DIR', 'P7HttpApiReader');
 
-// Change cwd to location of this file
+// Change current working directory to location of this file
 chdir(dirname(__FILE__));
 
 
 /**
  * Auto loading for project classes 
+ * 
  */
 spl_autoload_register(function ($className) {
     
