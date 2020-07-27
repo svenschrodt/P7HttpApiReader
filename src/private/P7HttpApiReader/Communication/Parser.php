@@ -1,5 +1,4 @@
 <?php declare(strict_types=1);
-
 /**
  * \P7HttpApiReader\Communication\Parser
  *
@@ -15,7 +14,6 @@
  * @see https://travis-ci.org/github/svenschrodt/P7HttpApiReader
  * @copyright Sven Schrodt<sven@schrodt-service.net>
  */
-
 namespace P7HttpApiReader\Communication;
 
 
@@ -47,6 +45,7 @@ class Parser
     /**
      * Splitting HTTP header lines in HTTP message to usable php array
      *
+     * @deprecated
      * @param array $headers
      * @return \stdClass
      */
@@ -65,6 +64,12 @@ class Parser
         return $headerData;
     }
     
+    /**
+     * Getting array data from raw (request | response) header
+     * 
+     * @param string $header
+     * @return mixed[]|NULL[]
+     */
     public static function getArrayFromHeader(string $header)
     {
         // explode from self::HEADER_SEPARATOR

@@ -20,7 +20,7 @@ abstract class AbstractClient
 {
     
     /**
-     * Raw http headers
+     * Sanitized raw http headers (response and request)
      * 
      * @var array
      */
@@ -96,22 +96,39 @@ abstract class AbstractClient
     }
     
     /**
-     * Generic function for processing HTTP(s) request to endpoint's uri with given method 
-     * and optional parameters (sent within uri or payload depending on chosen method as
-     * query string)
+     * Generic function for processing HTTP(s) request to endpoint's uri with given 
+     * method and optional parameters (sent within uri or payload depending on chosen 
+     * method as query string)
      * 
      * @todo To be implemented within each class, inheritating from __CLASS__
      * 
      * @todo delete method in __CLASS__ later!!  
-     *
-     * @param string $url
-     * @return boolean|mixed
+     * 
+     * @param string $uri
+     * @param string $method
+     * @param array $parameters
+     * @return \P7HttpApiReader\Communication\AbstractClient
      */
     public function processRequest(string $uri, string $method = 'GET', array $parameters = [])
     {
-
+        return $this;
     }
     
+    /**
+     * Setting method for current HTTP request
+     *
+     * @param string $method
+     */
+    protected function setMethod(string $method)
+    {
+        //@todo sanitize $method
+        if(!Protocol::isValidMethod($method)) {
+            throw new \InvalidArgumentException('Method ' . $method - ' is not vaild!');
+        }
+        $this->requestMethod = $method;
+        curl_setopt($this->curlHandle, CURLOPT_CUSTOMREQUEST, $method);
+        
+    }
     
     // Methods implementing HTTP methods (“verbs”)
     
