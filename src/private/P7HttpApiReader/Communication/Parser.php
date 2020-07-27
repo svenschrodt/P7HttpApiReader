@@ -49,7 +49,7 @@ class Parser
      * @param array $headers
      * @return \stdClass
      */
-    public static function splitHeaders(array $headers)
+    public static function splitHeaders23(array $headers)
     {
         $parts = explode(Protocol::HEADER_SEPARATOR, $headers);
         $headerData = new \stdClass();

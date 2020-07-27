@@ -151,7 +151,7 @@ class CurlClient extends AbstractClient
     /**
      * Setting (custom) request headers for current request 
      * 
-     * @todo reading from default configuration
+     * @todo reading from default configuration & do real stuff
      * @param array $headers
      */
     public function setRequestHeaders(array $headers = [])
