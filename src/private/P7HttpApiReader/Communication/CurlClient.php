@@ -104,9 +104,7 @@ class CurlClient extends AbstractClient
         
         
   }
-
-
-    
+  
     /**
      *  Setting payload parameters (POST, PUT) for current HTTP request
      *  
