@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types = 1);
 /**
  * \P7HttpApiReader\Communication\CurlClient
  *
@@ -7,7 +9,7 @@
  * @todo - complete method list with *all* HTTP verbs;-)
  *      
  * @package P7HttpApiReader
- * @version 0.1
+ * @version 0.9
  * @since 2020-07-26
  * @author Sven Schrodt<sven@schrodt-service.net>
  * @see https://github.com/svenschrodt/P7HttpApiReader
@@ -20,18 +22,25 @@ class CurlClient extends AbstractClient
 {
 
     /**
+     * Version of CurlClient
+     *
+     * @var string
+     */
+    const VERSION = '0.9';
+
+    /**
      * Handle for current cUrl operation
      *
      * @var integer
      */
-    protected $curlHandle = 1;
+    protected $curlHandle;
 
     /**
      * Time to live for current cUrl operation
      *
      * @var integer
      */
-    protected $ttl = 5;
+    protected $ttl;
 
     /**
      * Constructor function
@@ -46,10 +55,10 @@ class CurlClient extends AbstractClient
     }
 
     /**
-     * Generic function for processing HTTP(s) request to endpoint's uri with given 
-     * method and optional parameters (sent within uri or payload depending on 
-     * chosen method 
-     * 
+     * Generic function for processing HTTP(s) request to endpoint's uri with given
+     * method and optional parameters (sent within uri or payload depending on
+     * chosen method
+     *
      * @param string $uri
      * @param string $method
      * @param array $parameters
@@ -57,35 +66,35 @@ class CurlClient extends AbstractClient
      */
     public function processRequest(string $uri, string $method = 'GET', array $parameters = [])
     {
-     
-        // Setting $uri for current request        
+
+        // Setting $uri for current request
         $this->uri = $uri;
-        
-        // Init cUrl with current funtions 
+
+        // Init cUrl with current funtions
         $this->initCurlRequest($uri);
-        
+
         // Setting HTTP method for current request
-        $this->setMethod($method);        
-        
+        $this->setMethod($method);
+
         // Setting up payload parameters, if set
-        if(!empty($parameters)) {
-           
+        if (! empty($parameters)) {
+
             $this->setPayloadParameters($parameters);
         }
-        
-        //@todo -> reading default from configuration
+
+        // @todo -> reading default from configuration
         $this->setRequestHeaders();
         /**
          * Executing HTTP request with given parameters, headers and optional paylod
-         * 
-         * @var string  $response
+         *
+         * @var string $response
          */
         $response = curl_exec($this->curlHandle);
 
         // Setting header size for current response
         $this->responseHeaderSize = curl_getinfo($this->curlHandle, CURLINFO_HEADER_SIZE);
-        
-        /// @ todo -> replacig message separators within 7HttpApiReader\Communication\Parser
+
+        // / @ todo -> replacig message separators within 7HttpApiReader\Communication\Parser
         $this->rawHeader['response'] = str_replace(Protocol::MESSAGE_SEPARATOR, '', substr($response, 0, $this->responseHeaderSize));
         $this->responseBody = substr($response, $this->responseHeaderSize);
 
@@ -98,24 +107,24 @@ class CurlClient extends AbstractClient
         $res = curl_getinfo($this->curlHandle);
         $this->rawHeader['request'] = str_replace(Protocol::MESSAGE_SEPARATOR, '', $res['request_header']);
         $this->requestHeaders = Parser::getArrayFromHeader($this->rawHeader['response']);
-        
+
         // Closing current handle to cUrl
         curl_close($this->curlHandle);
-        
-        
-  }
-  
+    }
+
     /**
-     *  Setting payload parameters (POST, PUT) for current HTTP request
-     *  
+     * Setting payload parameters (POST, PUT) for current HTTP request
+     *
      * @param array $data
      */
     protected function setPayloadParameters(array $parameters)
     {
         $this->requestParameters = $parameters;
-        curl_setopt($this->curlHandle, CURLOPT_POSTFIELDS, $parameters);
+        // If parameters were sent as array, response would result in MultiPart-> no fun to parse.) 
+        curl_setopt($this->curlHandle, CURLOPT_POSTFIELDS, http_build_query($parameters));
+       
     }
-    
+
     /**
      * Initializing cUrl request with set parameters
      *
@@ -131,7 +140,7 @@ class CurlClient extends AbstractClient
 
         // Returning response instead of writing to STDOUT
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, 1);
-        
+
         // Setting timeout for connection creation
         curl_setopt($this->curlHandle, CURLOPT_CONNECTTIMEOUT, $this->ttl);
 
@@ -143,12 +152,11 @@ class CurlClient extends AbstractClient
 
         // Reading response headers from cUrl API!
         curl_setopt($this->curlHandle, CURLOPT_HEADER, 1);
-      
     }
 
     /**
-     * Setting (custom) request headers for current request 
-     * 
+     * Setting (custom) request headers for current request
+     *
      * @todo reading from default configuration & do real stuff
      * @param array $headers
      */

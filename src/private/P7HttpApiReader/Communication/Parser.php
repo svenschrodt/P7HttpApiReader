@@ -4,7 +4,7 @@
  *
  * Class for parsing HTTP(s) messages (requests and responses)
  * 
- * @todo -Optimizing message splitting (header size) --> multipart messages exist!
+ * @todo - Optimizing message splitting (header size) --> multipart messages exist!
  * 
  * @package P7HttpApiReader
  * @version 0.1
