@@ -18,6 +18,8 @@ composer.lock
 index.php
 .htaccess
 post.html
+index2.php
+
 # exclude local configuration
 .local.conf.php 
 

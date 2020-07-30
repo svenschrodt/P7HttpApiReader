@@ -84,5 +84,11 @@ class Parser
         }
         return $headers;
     }
+    
+    public static function parseQueryString(string $queryString)
+    {
+        parse_str($queryString, $dta);
+        return $dta;
+    }
 
 }
