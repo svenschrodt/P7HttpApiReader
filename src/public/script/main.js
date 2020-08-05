@@ -16,8 +16,8 @@
  * 
  */
 function addNameValueInput() {
-	
-		
+
+    // Define attributes for first input element [name of parameter]
 	var att = {
 		"name": "paramName[]",  
 		"type":  "text",  
@@ -31,6 +31,8 @@ function addNameValueInput() {
 	myList.appendChild(getElement("input", att));
 
 	// Appending input field for parmeter value
+	
+	 // Changing name attribute for second input element [value of parameter]
 	att["name"] = "paramValue[]";
 	myList.appendChild(getElement("input", att));
 	myList.appendChild(document.createElement("br"));
@@ -46,16 +48,20 @@ function addNameValueInput() {
  */
 
 function getElement(name, attributes, content) {
+	// Checking if 3rd parameter is given
 	var content = content || null;
 	
-	
+	// Creating new HTML element
 	var node = document.createElement(name);
-	for(var attName in attributes)
-	node.setAttribute(attName, attributes[attName]);
-	  
-
+	
+	// Adding attributes to HE
+	for(var attName in attributes) {
+		node.setAttribute(attName, attributes[attName]);
+	}
+		  
+    // if content given, add it to node
 	if (content != null) { 
-		// switch ba type of content -assuming it is text
+		// @todo switch by type of content -assuming it is text
 		node.appendChild(document.createTextNode(content));
 	} 
 	
